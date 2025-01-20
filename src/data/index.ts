@@ -1,6 +1,23 @@
 export const singleLineSeries: ApexAxisChartSeries = [
     {
         name: 'Series A',
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        data: Array.from({ length: 10 }).map(
+            () => Math.round((Math.random() + Number.EPSILON) * 100) / 100
+        ),
+    },
+]
+
+export const multiLineSeries: ApexAxisChartSeries = [
+    {
+        name: 'Series A',
+        data: Array.from({ length: 10 }).map(
+            () => Math.round((Math.random() + Number.EPSILON) * 100) / 100
+        ),
+    },
+    {
+        name: 'Series B',
+        data: Array.from({ length: 10 }).map(
+            () => Math.round((Math.random() + Number.EPSILON) * 100) / 100
+        ),
     },
 ]

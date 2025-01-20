@@ -20,9 +20,16 @@ export default function LineChart({ data, options = {} }: LineChartProps) {
         },
         chart: {
             type: 'line',
+            toolbar: {
+                show: false,
+            },
             zoom: {
                 enabled: false,
             },
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
         },
         stroke: {
             curve: 'smooth',
