@@ -18,6 +18,16 @@ export default function LineChart({ data, options = {} }: LineChartProps) {
         dataLabels: {
             enabled: false,
         },
+        title: {
+            align: 'left',
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+        },
+        stroke: {
+            curve: 'smooth',
+        },
         chart: {
             type: 'line',
             toolbar: {
@@ -26,13 +36,6 @@ export default function LineChart({ data, options = {} }: LineChartProps) {
             zoom: {
                 enabled: false,
             },
-        },
-        legend: {
-            position: 'top',
-            horizontalAlign: 'right',
-        },
-        stroke: {
-            curve: 'smooth',
         },
     }
 
