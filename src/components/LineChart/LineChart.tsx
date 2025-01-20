@@ -3,10 +3,18 @@ import ReactApexChart from 'react-apexcharts'
 
 interface LineChartProps {
     data: ApexAxisChartSeries
+    height?: number
+    width?: number
     options?: ApexOptions
 }
 
-export default function LineChart({ data, options = {} }: LineChartProps) {
+export default function LineChart({
+    data,
+    height,
+    width,
+    options = {},
+}: LineChartProps) {
+    const defaultChartHeight = 450
     const defaultChartWidth = 750
     const defaultOptions: ApexOptions = {
         grid: {
@@ -39,15 +47,16 @@ export default function LineChart({ data, options = {} }: LineChartProps) {
         },
     }
 
-    const width = options.chart?.width || defaultChartWidth
-    delete options.chart?.width
+    const _width = width || defaultChartWidth
+    const _height = height || defaultChartHeight
 
     return (
         <ReactApexChart
             type='line'
             series={data}
             options={{ ...defaultOptions, ...options }}
-            width={width}
+            height={_height}
+            width={_width}
         />
     )
 }
