@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import LineChart from '../LineChart'
 
-const MAIN_CSS_CLASS = '.apexcharts-canvas'
 const LEGEND_CSS_CLASS = '.apexcharts-legend'
 const X_AXIS_TICKS_CSS_CLASS = '.apexcharts-xaxis-texts-g text title'
 const ANNOTATIONS_CSS_CLASSES = {
@@ -15,14 +14,14 @@ const SERIES_CSS_CLASS = '.apexcharts-series'
 const DATALABELS_CSS_CLASS = '.apexcharts-datalabels .apexcharts-data-labels'
 
 describe('Simple Line Chart', () => {
-    it('Should be rendered correctly', () => {
+    it('Should be rendered correctly', async () => {
         render(<LineChart data={singleLineSeries} labels={categories} />)
 
         const xTicks = document.querySelectorAll(X_AXIS_TICKS_CSS_CLASS)
         const ticksTexts = Array.from(xTicks).map((tick) => tick.textContent)
 
         expect(screen.queryByTestId('spinner-container')).toBe(null)
-        expect(document.querySelector(MAIN_CSS_CLASS)).toBeInTheDocument()
+        expect(screen.getByTestId('line-chart')).toBeInTheDocument()
         expect(document.querySelector(LEGEND_CSS_CLASS)?.innerHTML).toBe('')
         expect(xTicks.length).toBe(10)
         expect(ticksTexts).toEqual(categories)
@@ -43,7 +42,7 @@ describe('Multi-Line Chart', () => {
         render(<LineChart data={multiLineSeries} labels={categories} />)
 
         expect(screen.queryByTestId('spinner-container')).toBe(null)
-        expect(document.querySelector(MAIN_CSS_CLASS)).toBeInTheDocument()
+        expect(screen.getByTestId('line-chart')).toBeInTheDocument()
         expect(
             document.querySelectorAll(
                 LEGEND_CSS_CLASS + ' .apexcharts-legend-series'
@@ -64,7 +63,7 @@ describe('With Data Labels', () => {
         )
 
         expect(screen.queryByTestId('spinner-container')).toBe(null)
-        expect(document.querySelector(MAIN_CSS_CLASS)).toBeInTheDocument()
+        expect(screen.getByTestId('line-chart')).toBeInTheDocument()
         expect(document.querySelectorAll(DATALABELS_CSS_CLASS).length).toBe(
             singleLineSeries[0].data.length - 1
         )
@@ -96,7 +95,7 @@ describe('With Annotations', () => {
         )
 
         expect(screen.queryByTestId('spinner-container')).toBe(null)
-        expect(document.querySelector(MAIN_CSS_CLASS)).toBeInTheDocument()
+        expect(screen.getByTestId('line-chart')).toBeInTheDocument()
         expect(
             document.querySelector(ANNOTATIONS_CSS_CLASSES.xAxis + ' text')
         ).toBeInTheDocument()
@@ -112,7 +111,7 @@ describe('Loading state', () => {
             <LineChart data={singleLineSeries} labels={categories} loading />
         )
 
-        expect(document.querySelector(MAIN_CSS_CLASS)).not.toBeInTheDocument()
+        expect(screen.queryByTestId('line-chart')).toBe(null)
         expect(screen.getByTestId('spinner-container')).toBeInTheDocument()
     })
 })

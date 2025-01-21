@@ -16,3 +16,24 @@ Object.defineProperty(globalThis.SVGElement.prototype, 'getBBox', {
         y: 0,
     }),
 })
+Object.defineProperty(globalThis.SVGElement.prototype, 'getScreenCTM', {
+    writable: true,
+    value: vi.fn(),
+})
+Object.defineProperty(
+    globalThis.SVGElement.prototype,
+    'getComputedTextLength',
+    {
+        writable: true,
+        value: vi.fn().mockReturnValue(0),
+    }
+)
+Object.defineProperty(globalThis.SVGElement.prototype, 'createSVGMatrix', {
+    writable: true,
+    value: vi.fn().mockReturnValue({
+        x: 10,
+        y: 10,
+        inverse: () => {},
+        multiply: () => {},
+    }),
+})

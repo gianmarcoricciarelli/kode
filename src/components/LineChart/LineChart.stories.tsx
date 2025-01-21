@@ -1,5 +1,6 @@
 import { categories, multiLineSeries, singleLineSeries } from '@data/index'
 import { Meta, StoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/test'
 import LineChart from './LineChart'
 
 const meta = {
@@ -28,6 +29,11 @@ export const SimpleLineChart: Story = {
                 title: { text: 'Numbers' },
             },
         },
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement)
+
+        await userEvent.hover(canvas.getByTestId('line-chart'))
     },
 }
 
@@ -156,6 +162,30 @@ export const WithAnnotations: Story = {
                 title: { text: 'Numbers' },
             },
         },
+    },
+}
+
+export const WithActionOnClick: Story = {
+    args: {
+        data: singleLineSeries,
+        labels: categories,
+        options: {
+            title: {
+                text: 'Numbers and Letters',
+            },
+            xaxis: {
+                title: { text: 'Letters' },
+            },
+            yaxis: {
+                title: { text: 'Numbers' },
+            },
+        },
+        onClick: () => alert('Click!'),
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement)
+        await canvas.findByTestId('line-chart')
+        await userEvent.click(canvas.getByTestId('line-chart'))
     },
 }
 

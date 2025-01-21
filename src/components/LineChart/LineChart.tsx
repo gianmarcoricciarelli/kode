@@ -11,6 +11,7 @@ interface LineChartProps {
     options?: ApexOptions
     annotations?: ApexAnnotations
     loading?: boolean
+    onClick?: () => void
 }
 
 export default function LineChart({
@@ -21,6 +22,7 @@ export default function LineChart({
     options = {},
     annotations = {},
     loading,
+    onClick,
 }: LineChartProps) {
     const defaultOptions: ApexOptions = {
         grid: {
@@ -44,6 +46,7 @@ export default function LineChart({
         },
         chart: {
             type: 'line',
+            animations: { speed: 500 },
             toolbar: {
                 show: false,
             },
@@ -55,6 +58,13 @@ export default function LineChart({
 
     const _options: ApexOptions = {
         ...defaultOptions,
+        chart: {
+            ...defaultOptions.chart,
+            events: {
+                ...defaultOptions.chart?.events,
+                click: onClick ? onClick : defaultOptions.chart?.events?.click,
+            },
+        },
         dataLabels: {
             ...defaultOptions.dataLabels,
             ...options.dataLabels,
@@ -90,6 +100,7 @@ export default function LineChart({
 
     return (
         <ReactApexChart
+            data-testid='line-chart'
             type='line'
             series={data}
             options={_options}
