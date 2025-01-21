@@ -2,6 +2,7 @@ import { categories, multiLineSeries, singleLineSeries } from '@data/index'
 import { Meta, StoryObj } from '@storybook/react'
 import { userEvent, within } from '@storybook/test'
 import LineChart from './LineChart'
+import { markerClickEventOptions } from './types'
 
 const meta = {
     title: 'LineChart',
@@ -180,7 +181,14 @@ export const WithActionOnClick: Story = {
                 title: { text: 'Numbers' },
             },
         },
-        onClick: () => alert('Click!'),
+        onClick: (options: markerClickEventOptions) => {
+            const seriesIndex = options.seriesIndex
+            const dataPointIndex = options.dataPointIndex
+
+            alert(
+                `Clicked on DataPoint ${singleLineSeries[seriesIndex].data[dataPointIndex]}!`
+            )
+        },
     },
     play: async ({ canvasElement }) => {
         const canvas = within(canvasElement)

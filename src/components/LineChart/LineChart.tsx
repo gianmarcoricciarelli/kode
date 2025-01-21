@@ -2,6 +2,7 @@ import { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
 import { Spinner } from 'react-bootstrap'
 import style from './LineChart.module.scss'
+import { markerClickEventOptions } from './types'
 
 interface LineChartProps {
     data: ApexAxisChartSeries
@@ -11,7 +12,7 @@ interface LineChartProps {
     options?: ApexOptions
     annotations?: ApexAnnotations
     loading?: boolean
-    onClick?: () => void
+    onClick?: (options: markerClickEventOptions) => void
 }
 
 export default function LineChart({
@@ -62,7 +63,11 @@ export default function LineChart({
             ...defaultOptions.chart,
             events: {
                 ...defaultOptions.chart?.events,
-                click: onClick ? onClick : defaultOptions.chart?.events?.click,
+                markerClick: onClick
+                    ? (_, __, options: markerClickEventOptions) => {
+                          onClick(options)
+                      }
+                    : defaultOptions.chart?.events?.click,
             },
         },
         dataLabels: {
