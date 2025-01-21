@@ -3,19 +3,21 @@ import ReactApexChart from 'react-apexcharts'
 
 interface LineChartProps {
     data: ApexAxisChartSeries
-    height?: number
-    width?: number
+    labels: ApexXAxis['categories']
+    height?: string | number
+    width?: string | number
     options?: ApexOptions
+    annotations?: ApexAnnotations
 }
 
 export default function LineChart({
     data,
-    height,
-    width,
+    labels,
+    height = 450,
+    width = 750,
     options = {},
+    annotations = {},
 }: LineChartProps) {
-    const defaultChartHeight = 450
-    const defaultChartWidth = 750
     const defaultOptions: ApexOptions = {
         grid: {
             row: {
@@ -47,16 +49,31 @@ export default function LineChart({
         },
     }
 
-    const _width = width || defaultChartWidth
-    const _height = height || defaultChartHeight
+    const _options: ApexOptions = {
+        ...defaultOptions,
+        dataLabels: {
+            ...defaultOptions.dataLabels,
+            ...options.dataLabels,
+        },
+        xaxis: {
+            ...options.xaxis,
+            categories: labels,
+        },
+        yaxis: {
+            ...options.yaxis,
+        },
+        annotations: {
+            ...annotations,
+        },
+    }
 
     return (
         <ReactApexChart
             type='line'
             series={data}
-            options={{ ...defaultOptions, ...options }}
-            height={_height}
-            width={_width}
+            options={_options}
+            height={height}
+            width={width}
         />
     )
 }

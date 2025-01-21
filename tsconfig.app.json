@@ -24,7 +24,8 @@
 
         /* Paths */
         "paths": {
-            "@components/*": ["./src/components/*"]
+            "@components/*": ["./src/components/*"],
+            "@data/*": ["./src/data/*"]
         }
     },
     "include": ["src"]
