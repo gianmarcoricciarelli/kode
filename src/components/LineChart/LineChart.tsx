@@ -2,7 +2,7 @@ import { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
 import { Spinner } from 'react-bootstrap'
 import style from './LineChart.module.scss'
-import { markerClickEventOptions } from './types'
+import { markerClickEventOptions } from './LineChart.types'
 
 interface LineChartProps {
     data: ApexAxisChartSeries

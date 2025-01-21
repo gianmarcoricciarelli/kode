@@ -2,7 +2,7 @@ import { categories, multiLineSeries, singleLineSeries } from '@data/index'
 import { Meta, StoryObj } from '@storybook/react'
 import { userEvent, within } from '@storybook/test'
 import LineChart from './LineChart'
-import { markerClickEventOptions } from './types'
+import { markerClickEventOptions } from './LineChart.types'
 
 const meta = {
     title: 'LineChart',
