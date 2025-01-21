@@ -59,6 +59,10 @@ export default function LineChart({
 
     const _options: ApexOptions = {
         ...defaultOptions,
+        title: {
+            ...defaultOptions.title,
+            ...options.title,
+        },
         chart: {
             ...defaultOptions.chart,
             events: {
