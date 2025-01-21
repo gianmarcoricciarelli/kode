@@ -1,5 +1,7 @@
 import { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
+import { Spinner } from 'react-bootstrap'
+import style from './LineChart.module.scss'
 
 interface LineChartProps {
     data: ApexAxisChartSeries
@@ -8,6 +10,7 @@ interface LineChartProps {
     width?: string | number
     options?: ApexOptions
     annotations?: ApexAnnotations
+    loading?: boolean
 }
 
 export default function LineChart({
@@ -17,6 +20,7 @@ export default function LineChart({
     width = 750,
     options = {},
     annotations = {},
+    loading,
 }: LineChartProps) {
     const defaultOptions: ApexOptions = {
         grid: {
@@ -65,6 +69,22 @@ export default function LineChart({
         annotations: {
             ...annotations,
         },
+    }
+
+    if (loading) {
+        return (
+            <div
+                style={{ height, width }}
+                className={style['loading-container']}
+            >
+                <Spinner
+                    className={style['loading-container__spinner']}
+                    animation='border'
+                    variant='primary'
+                />
+                <span>Loading...</span>
+            </div>
+        )
     }
 
     return (

@@ -158,3 +158,22 @@ export const WithAnnotations: Story = {
         },
     },
 }
+
+export const DataIsLoading: Story = {
+    args: {
+        data: [],
+        labels: [],
+        options: {
+            title: {
+                text: 'Numbers and Letters',
+            },
+            xaxis: {
+                title: { text: 'Letters' },
+            },
+            yaxis: {
+                title: { text: 'Numbers' },
+            },
+        },
+        loading: true,
+    },
+}
