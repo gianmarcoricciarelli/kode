@@ -1,4 +1,15 @@
-export const categories = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+export const categories: ApexXAxis['categories'] = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+]
 
 export const singleLineSeries: ApexAxisChartSeries = [
     {

@@ -74,6 +74,7 @@ export default function LineChart({
     if (loading) {
         return (
             <div
+                data-testid='spinner-container'
                 style={{ height, width }}
                 className={style['loading-container']}
             >
