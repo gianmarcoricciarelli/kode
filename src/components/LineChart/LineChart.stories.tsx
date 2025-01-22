@@ -1,6 +1,5 @@
 import { categories, multiLineSeries, singleLineSeries } from '@data/index'
 import { Meta, StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/test'
 import LineChart from './LineChart'
 import { markerClickEventOptions } from './LineChart.types'
 
@@ -17,6 +16,7 @@ type Story = StoryObj<typeof LineChart>
 
 export const SimpleLineChart: Story = {
     args: {
+        width: 750,
         data: singleLineSeries,
         labels: categories,
         options: {
@@ -31,15 +31,11 @@ export const SimpleLineChart: Story = {
             },
         },
     },
-    play: async ({ canvasElement }) => {
-        const canvas = within(canvasElement)
-
-        await userEvent.hover(canvas.getByTestId('line-chart'))
-    },
 }
 
 export const MultiLineChart: Story = {
     args: {
+        width: 750,
         data: multiLineSeries,
         labels: categories,
         options: {
@@ -58,6 +54,7 @@ export const MultiLineChart: Story = {
 
 export const WithDataLabels: Story = {
     args: {
+        width: 750,
         data: singleLineSeries,
         labels: categories,
         options: {
@@ -82,6 +79,7 @@ const max = Math.max(...(singleLineSeries[0].data as number[]))
 const min = Math.min(...(singleLineSeries[0].data as number[]))
 export const WithAnnotations: Story = {
     args: {
+        width: 750,
         data: singleLineSeries,
         labels: categories,
         annotations: {
@@ -168,6 +166,7 @@ export const WithAnnotations: Story = {
 
 export const WithActionOnClick: Story = {
     args: {
+        width: 750,
         data: singleLineSeries,
         labels: categories,
         options: {
@@ -190,15 +189,11 @@ export const WithActionOnClick: Story = {
             )
         },
     },
-    play: async ({ canvasElement }) => {
-        const canvas = within(canvasElement)
-        await canvas.findByTestId('line-chart')
-        await userEvent.click(canvas.getByTestId('line-chart'))
-    },
 }
 
 export const DataIsLoading: Story = {
     args: {
+        width: 750,
         data: [],
         labels: [],
         options: {
