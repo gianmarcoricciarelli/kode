@@ -21,6 +21,7 @@ describe('Interactions', () => {
 
     it('Should present a tooltip when hovering on the Chart', () => {
         cy.mount(<LineChart data={singleLineSeries} labels={categories} />)
+        cy.get('svg').should('be.visible')
         cy.get('.apexcharts-tooltip').should('not.be.visible')
         cy.get('svg').realHover()
         cy.get('.apexcharts-tooltip').should('be.visible')

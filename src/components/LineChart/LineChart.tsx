@@ -7,19 +7,22 @@ import { markerClickEventOptions } from './LineChart.types'
 interface LineChartProps {
     data: ApexAxisChartSeries
     labels: ApexXAxis['categories']
-    height?: number | string
-    width?: number | string
+    width?: number
+    height?: number
     options?: ApexOptions
     annotations?: ApexAnnotations
     loading?: boolean
     onClick?: (options: markerClickEventOptions) => void
 }
 
+const DEFAULT_WIDTH = 750
+const DEFAULT_HEIGHT = 450
+
 export default function LineChart({
     data,
     labels,
-    height = 'auto',
-    width = '100%',
+    width = DEFAULT_WIDTH,
+    height = DEFAULT_HEIGHT,
     options = {},
     annotations = {},
     loading,
@@ -94,15 +97,7 @@ export default function LineChart({
         return (
             <div
                 data-testid='spinner-container'
-                style={{
-                    height:
-                        typeof height === 'number'
-                            ? height + 15
-                            : typeof width === 'number'
-                            ? Math.round(width / 1.618 + 15)
-                            : 'auto',
-                    width,
-                }}
+                style={{ width: `${width}px`, height: `${height + 15}px` }}
                 className={style['loading-container']}
             >
                 <Spinner

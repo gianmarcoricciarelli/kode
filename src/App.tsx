@@ -19,8 +19,6 @@ export default function App() {
             <span>LineChart Component test on Dev environment</span>
             <span>Click on the Chart to see the DataPoint's value</span>
             <LineChart
-                width={750}
-                height={450}
                 data={singleLineSeries}
                 labels={categories}
                 options={{
