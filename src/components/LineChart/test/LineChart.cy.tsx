@@ -25,5 +25,6 @@ describe('Interactions', () => {
         cy.get('.apexcharts-tooltip').should('not.be.visible')
         cy.get('svg').realHover()
         cy.get('.apexcharts-tooltip').should('be.visible')
+        cy.contains('Series A:').should('be.visible')
     })
 })
