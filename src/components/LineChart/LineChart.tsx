@@ -113,6 +113,7 @@ export default function LineChart({
     return (
         <ReactApexChart
             data-testid='line-chart'
+            className={style['line-chart']}
             type='line'
             series={data}
             options={_options}

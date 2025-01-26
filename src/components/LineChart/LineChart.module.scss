@@ -10,3 +10,9 @@
         width: 60px;
     }
 }
+
+.line-chart {
+    svg[class='apexcharts-svg'] {
+        overflow: visible;
+    }
+}
