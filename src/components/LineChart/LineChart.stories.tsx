@@ -9,58 +9,10 @@ const meta = {
     parameters: {
         layout: 'centered',
     },
-} satisfies Meta<typeof LineChart>
-
-export default meta
-type Story = StoryObj<typeof LineChart>
-
-export const SimpleLineChart: Story = {
     args: {
-        width: 750,
         data: singleLineSeries,
         labels: categories,
         options: {
-            title: {
-                text: 'Numbers and Letters',
-            },
-            xaxis: {
-                title: { text: 'Letters' },
-            },
-            yaxis: {
-                title: { text: 'Numbers' },
-            },
-        },
-    },
-}
-
-export const MultiLineChart: Story = {
-    args: {
-        width: 750,
-        data: multiLineSeries,
-        labels: categories,
-        options: {
-            title: {
-                text: 'Numbers and Letters',
-            },
-            xaxis: {
-                title: { text: 'Letters' },
-            },
-            yaxis: {
-                title: { text: 'Numbers' },
-            },
-        },
-    },
-}
-
-export const WithDataLabels: Story = {
-    args: {
-        width: 750,
-        data: singleLineSeries,
-        labels: categories,
-        options: {
-            dataLabels: {
-                enabled: true,
-            },
             title: {
                 text: 'Numbers and Letters',
             },
@@ -73,15 +25,36 @@ export const WithDataLabels: Story = {
             },
         },
     },
+    tags: ['autodocs'],
+} satisfies Meta<typeof LineChart>
+
+export default meta
+type Story = StoryObj<typeof LineChart>
+
+export const SimpleLineChart: Story = {}
+
+export const MultiLineChart: Story = {
+    args: {
+        data: multiLineSeries,
+    },
+}
+
+export const WithDataLabels: Story = {
+    args: {
+        options: {
+            ...meta.args.options,
+            dataLabels: {
+                enabled: true,
+            },
+        },
+    },
 }
 
 const max = Math.max(...(singleLineSeries[0].data as number[]))
 const min = Math.min(...(singleLineSeries[0].data as number[]))
 export const WithAnnotations: Story = {
     args: {
-        width: 750,
-        data: singleLineSeries,
-        labels: categories,
+        ...meta.args.options,
         annotations: {
             xaxis: [
                 {
@@ -150,36 +123,11 @@ export const WithAnnotations: Story = {
                 },
             ],
         },
-        options: {
-            title: {
-                text: 'Numbers and Letters',
-            },
-            xaxis: {
-                title: { text: 'Letters' },
-            },
-            yaxis: {
-                title: { text: 'Numbers' },
-            },
-        },
     },
 }
 
 export const WithActionOnClick: Story = {
     args: {
-        width: 750,
-        data: singleLineSeries,
-        labels: categories,
-        options: {
-            title: {
-                text: 'Numbers and Letters',
-            },
-            xaxis: {
-                title: { text: 'Letters' },
-            },
-            yaxis: {
-                title: { text: 'Numbers' },
-            },
-        },
         onClick: (options: markerClickEventOptions) => {
             const seriesIndex = options.seriesIndex
             const dataPointIndex = options.dataPointIndex
@@ -193,20 +141,8 @@ export const WithActionOnClick: Story = {
 
 export const DataIsLoading: Story = {
     args: {
-        width: 750,
         data: [],
         labels: [],
-        options: {
-            title: {
-                text: 'Numbers and Letters',
-            },
-            xaxis: {
-                title: { text: 'Letters' },
-            },
-            yaxis: {
-                title: { text: 'Numbers' },
-            },
-        },
         loading: true,
     },
 }
